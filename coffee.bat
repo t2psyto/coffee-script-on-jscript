@@ -1,5 +1,6 @@
 @set @junk=1 /* vim:set ft=javascript:
-@cscript //nologo //e:jscript "%~dpn0.bat" %*
+@if exist "c:\Windows\System32\jscript9.dll" (set SCRIPTENGINE={16d51579-a30b-4c8b-a276-0ff4dc41e755}) else set SCRIPTENGINE=JScript
+@cscript //nologo //e:%SCRIPTENGINE% "%~dpn0.bat" %*
 @goto :eof
 */
 
@@ -302,6 +303,7 @@ function main() {
 
   if (o.version) {
     WScript.Echo("CoffeeScript version " + CoffeeScript.VERSION);
+    WScript.Echo("JScript version " + ScriptEngine() + '/' + [ScriptEngineMajorVersion(), ScriptEngineMinorVersion(), ScriptEngineBuildVersion()].join('.'));
     return;
   }
 
